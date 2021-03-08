@@ -3,13 +3,19 @@ import { RepositoryItem } from './RepositoryItem'
 
 import "../styles/repositories.scss"
 
+interface Repository {
+  name: string
+  description: string
+  html_url: string
+}
+
 export function RepositoryList() {
-  const [repositories, setRepositories] = useState([])
+  const [repositories, setRepositories] = useState([] as Repository[])
 
   useEffect(() => {
     fetch("https://api.github.com/users/demotional/repos")
       .then(response => response.json())
-      .then(data => setRepositories(data))
+      .then((data: Repository[]) => setRepositories(data))
   }, [])
 
   return (
